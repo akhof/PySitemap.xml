@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import argparse, time, sys
-from core import *
+from PySitemap import *
 
 def run():
     print("PySitemap.xml {}\n".format(VERSION))
