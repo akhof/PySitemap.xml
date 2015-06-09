@@ -1,5 +1,5 @@
-# PySitemap.xml
-PySitemap.xml is a tool to create xml-sitemaps with python.  NOT TESTED FULL!!! v.01.1.BETA1!!!
+# PySitemap.xml 0.1
+PySitemap.xml is a tool to create xml-sitemaps with python.
 
 ## Requirements
 * Python 2
