@@ -5,6 +5,8 @@ import argparse, time, sys
 from core import *
 
 def run():
+    print("PySitemap.xml {}\n".format(VERSION))
+    
     parser = argparse.ArgumentParser(prog="PySitemap.xml")
     
     parser.add_argument("Domain",                                                                               help="Domain to create a sitemap")
