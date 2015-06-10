@@ -7,12 +7,9 @@ from datetime import datetime, date
 
 def createXml(sitemap, useChangeFreq=False, useLastModification=False, usePriority=False):
     urlset = ET.Element("urlset")
-    urlset.append( ET.Comment(" Created with PySitemap ") )
-    urlset.append( ET.Comment(" {} ".format(datetime.today().strftime("%Y-%m-%d %H:%M:%S"))) )
-    c=0 
+    urlset.append( ET.Comment("created with PySitemap at {}".format(datetime.today().strftime("%Y-%m-%d %H:%M:%S"))))
     
     for url in sitemap.urls.values():
-        c+=1
         xmlUrl = ET.SubElement(urlset, "url")
         
         ET.SubElement(xmlUrl, "loc").text = url.loc
@@ -40,5 +37,4 @@ def createXml(sitemap, useChangeFreq=False, useLastModification=False, usePriori
     
     xml = md.parseString(ET.tostring(urlset, "utf-8")).toprettyxml()
     xml = xml.replace("<urlset", """<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\"""")
-    print c
     return xml
