@@ -14,7 +14,7 @@ class Url():
 class Sitemap():
     def __init__(self, title="", domain="", useHTTPS=False, ignoreUrlArguments=True, onlyHtml=True, firstUrlToCrawl="/", showDownloadDetails=False, userobots=False):
         self.title = title
-        self.domain = domain.split("http://")[-1].split("https://")[-1]
+        self.domain = domain.split("http://")[-1].split("https://")[-1] # http://google.com/ -> google.com/
         self.useHTTPS = useHTTPS
         self.ignoreUrlArguments = ignoreUrlArguments
         self.onlyHtml = onlyHtml

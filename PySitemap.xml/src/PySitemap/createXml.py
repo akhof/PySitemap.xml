@@ -5,9 +5,11 @@ import xml.etree.cElementTree as ET
 import xml.dom.minidom as md
 from datetime import datetime, date
 
-def createXml(sitemap, useChangeFreq=False, useLastModification=False, usePriority=False):
+def createXml(sitemap, useChangeFreq=False, useLastModification=False, usePriority=False, dateformat="%Y-%m-%d", datetimeformat="%Y-%m-%dT%H:%M:%S"):
     urlset = ET.Element("urlset")
-    urlset.append( ET.Comment("created with PySitemap at {}".format(datetime.today().strftime("%Y-%m-%d %H:%M:%S"))))
+    urlset.set("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9")
+    urlset.append( ET.Comment("created with PySitemap.xml at {}".format(datetime.today().strftime(datetimeformat))))
+    urlset.append( ET.Comment("pages in sitemap: {} ".format(len(sitemap.urls.keys()))) )
     
     for url in sitemap.urls.values():
         xmlUrl = ET.SubElement(urlset, "url")
@@ -27,14 +29,13 @@ def createXml(sitemap, useChangeFreq=False, useLastModification=False, usePriori
             if type(lmod) == str:
                 txt = lmod
             elif type(lmod) == date:
-                txt = lmod.strftime("%Y-%m-%d")
+                txt = lmod.strftime(dateformat)
             elif type(lmod) == datetime:
-                txt = lmod.strftime("%Y-%m-%dT%H:%M:%S")
+                txt = lmod.strftime(datetimeformat)
             else:
                 continue
 
             ET.SubElement(xmlUrl, "lastmod").text = txt
     
-    xml = md.parseString(ET.tostring(urlset, "utf-8")).toprettyxml()
-    xml = xml.replace("<urlset", """<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\"""")
-    return xml
+    xml = ET.tostring(urlset, "utf-8")
+    return md.parseString(xml).toprettyxml()

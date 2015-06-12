@@ -159,7 +159,7 @@ def analyContent(sitemap, content):
     
     hrefs = []
     robots = "index, follow"
-    def analyChilds(node, ebene=0):
+    def analyChilds(node):
         for child in node.getchildren():
             try:
                 if child.tag.lower() == "meta" and "name" in child.attrib and "content" in child.attrib:
@@ -170,7 +170,7 @@ def analyContent(sitemap, content):
             except AttributeError:
                 pass
             finally:
-                analyChilds(child, ebene+1)
+                analyChilds(child)
     analyChilds(tree)
 
     index = "index" in robots

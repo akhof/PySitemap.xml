@@ -74,7 +74,7 @@ def run():
             try: f.close()
             except: pass
     if args.console:
-        print("\n{0}  GENERATED XML-SITEMAP:  {0}".format(15*'*'))
+        print("\n{0}  GENERATED XML-SITEMAP  {0}".format(15*'*'))
         print(xml)
 
 if __name__ == "__main__":
