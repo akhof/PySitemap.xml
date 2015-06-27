@@ -33,9 +33,10 @@ def createXml(sitemap, useChangeFreq=False, useLastModification=False, usePriori
             elif type(lmod) == datetime:
                 txt = lmod.strftime(datetimeformat)
             else:
-                continue
+                lmod = None
 
-            ET.SubElement(xmlUrl, "lastmod").text = txt
+            if lmod != None:
+                ET.SubElement(xmlUrl, "lastmod").text = txt
     
     xml = ET.tostring(urlset, "utf-8")
     return md.parseString(xml).toprettyxml()
