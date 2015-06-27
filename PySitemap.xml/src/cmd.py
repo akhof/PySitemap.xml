@@ -30,7 +30,7 @@ def run():
     args = parser.parse_args()
     
     if args.save == None and not args.console:
-        print("WARNING: You don't print or save generated sitemap!\n")
+        print("WARNING: You don't print or save generated sitemap! Press STRG+C to cancel...\n")
         time.sleep(2)
     
     sitemap = Sitemap(
